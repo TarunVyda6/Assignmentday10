@@ -22,4 +22,8 @@ results[3]=$res3
 res4=$(( $a%$b+$c ))
 results[4]=$res4
 
-echo "results of all the expressions is "${results[@]}
+declare -a arrayResults
+arrayResults=${results[@]}
+
+
+echo "results of all the expressions is "${arrayResults[@]}
