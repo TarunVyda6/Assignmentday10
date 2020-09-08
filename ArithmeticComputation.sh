@@ -23,7 +23,14 @@ res4=$(( $a%$b+$c ))
 results[4]=$res4
 
 declare -a arrayResults
-arrayResults=${results[@]}
+
+arrayResults[0]=${results[1]}
+arrayResults[1]=${results[2]}
+arrayResults[2]=${results[3]}
 
 
-echo "results of all the expressions is "${arrayResults[@]}
+IFS=$'\n' sorted=($(sort -r <<<"${arrayResults[*]}"))
+unset IFS
+printf "%s " "${sorted[@]}"
+
+
