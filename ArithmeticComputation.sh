@@ -21,3 +21,5 @@ echo "result of "$a"*"$b"+"$c" is "$res2
 res3=`awk "BEGIN {print $c+$a/$b }"`
 echo "result of "$c"+"$a"/"$b" is "$res3
 
+res4=$(( $a%$b+$c ))
+echo "result of "$a"%"$b"+"$c" is "$res4
