@@ -28,9 +28,13 @@ arrayResults[0]=${results[1]}
 arrayResults[1]=${results[2]}
 arrayResults[2]=${results[3]}
 
-
+echo "array in descending order"
 IFS=$'\n' sorted=($(sort -r <<<"${arrayResults[*]}"))
 unset IFS
 printf "%s " "${sorted[@]}"
-
+echo ""
+echo "array in ascending order"
+IFS=$'\n' sorted=($(sort <<<"${arrayResults[*]}"))
+unset IFS
+printf "%s " "${sorted[@]}"
 
