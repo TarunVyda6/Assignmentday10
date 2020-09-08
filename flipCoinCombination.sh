@@ -19,7 +19,7 @@ thhCount=0
 thtCount=0
 hthCount=0
 
-while(( $count<10 ))
+while(( $count<40 ))
 do
 	result=$(( RANDOM%2 ))
 	count=$(( $count+1 ))
@@ -32,7 +32,7 @@ do
 done
 
 
-while(( $count1<10 ))
+while(( $count1<40 ))
 do
         result1=$(( RANDOM%2 ))
 	result2=$(( RANDOM%2 ))
@@ -54,7 +54,7 @@ done
 
 
 
-while(( $count2<10 ))
+while(( $count2<40 ))
 do
         result3=$(( RANDOM%2 ))
         result4=$(( RANDOM%2 ))
@@ -86,23 +86,27 @@ do
                 hthCount=$(( $hthCount+1 ))
         fi
 done
-
 declare -A combination
 
-combination["head"]=$hCount
-combination["tail"]=$tCount
+combination["h"]=$hCount
+combination["t"]=$tCount
 
 hPercentage=`awk "BEGIN {print $hCount*100/$count}"`
 tPercentage=`awk "BEGIN {print $tCount*100/$count}"`
+
+for key in "${!combination[@]}"; do
+  printf '%s:%s\n' "$key" "${combination[$key]}"
+done | sort -t : -k 2n
+
 
 
 
 declare -A DoubletCombination
 
-DoubletCombination["headhead"]=$hhCount
-DoubletCombination["tailtail"]=$ttCount
-DoubletCombination["tailhead"]=$thCount
-DoubletCombination["headtail"]=$htCount
+DoubletCombination["hh"]=$hhCount
+DoubletCombination["tt"]=$ttCount
+DoubletCombination["th"]=$thCount
+DoubletCombination["ht"]=$htCount
 
 hhPercentage=`awk "BEGIN {print $hhCount*100/$count1}"`
 htPercentage=`awk "BEGIN {print $htCount*100/$count1}"`
@@ -110,17 +114,27 @@ ttPercentage=`awk "BEGIN {print $ttCount*100/$count1}"`
 thPercentage=`awk "BEGIN {print $thCount*100/$count1}"`
 
 
+
+for key in "${!DoubletCombination[@]}"; do
+  printf '%s:%s\n' "$key" "${DoubletCombination[$key]}"
+done | sort -t : -k 2n
+
+
+
 declare -A TripletCombination
 
 TripetCombination["hhh"]=$hhhCount
 TripletCombination["ttt"]=$tttCount
-TripetCombination["hht"]=$hhtCount
+TripletCombination["hht"]=$hhtCount
 TripletCombination["htt"]=$httCount
-TripetCombination["tth"]=$tthCount
+TripletCombination["tth"]=$tthCount
 TripletCombination["thh"]=$thhCount
-TripetCombination["tht"]=$thtCount
+TripletCombination["tht"]=$thtCount
 TripletCombination["hth"]=$hthCount
 
+for key in "${!TripletCombination[@]}"; do
+  printf '%s:%s\n' "$key" "${TripletCombination[$key]}"
+done | sort -t : -k 2n
 
 
 hhhPercentage=`awk "BEGIN {print $hhhCount*100/$count2}"`
@@ -132,14 +146,18 @@ thhPercentage=`awk "BEGIN {print $thhCount*100/$count2}"`
 thtPercentage=`awk "BEGIN {print $thtCount*100/$count2}"`
 hthPercentage=`awk "BEGIN {print $hthCount*100/$count2}"`
 
-echo "hhh percentage is "$hhhPercentage
-echo "ttt percentage is "$tttPercentage
-echo "hht percentage is "$hhtPercentage
-echo "htt percentage is "$httPercentage
-echo "tth percentage is "$tthPercentage
-echo "thh percentage is "$thhPercentage
-echo "tht percentage is "$thtPercentage
-echo "hth percentage is "$hthPercentage
+declare -a Triplet
+
+Triplet=($hhhPercentage $tttPercentage $hhtPercentage $httPercentage $tthPercentage $thhPercentage $thtPercentage $hthPercentage )
+#echo ${Triplet[@]}
+#echo "hhh percentage is "$hhhPercentage
+#echo "ttt percentage is "$tttPercentage
+#echo "hht percentage is "$hhtPercentage
+#echo "htt percentage is "$httPercentage
+#echo "tth percentage is "$tthPercentage
+#echo "thh percentage is "$thhPercentage
+#echo "tht percentage is "$thtPercentage
+#echo "hth percentage is "$hthPercentage
 
 
 
